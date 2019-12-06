@@ -1,0 +1,10 @@
+<h1>my assignments for <%=courseName%> </h1>
+
+
+<div class="assignments">
+  <ul>
+    <% for(var i = 0; i < quizList.length; i++) { %>
+        <li><a href="/doAssignment?quizId=<%=quizList[i]._id%>"> <%=quizList[i].quizName%> <%=quizList[i].dueDate%> </a></li>
+    <% } %>
+  </ul>
+</div>

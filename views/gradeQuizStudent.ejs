@@ -1,0 +1,38 @@
+<h1>results</h1>
+
+<span><%=student.email%></span>
+<span><%=quiz.quizName%></span>
+
+
+<% const quizResult = student.quizzResults.find(result=>{
+  return result.quizId === quiz._id.toString()
+})
+let numCorrect = 0
+ for(let i = 0; i < quiz.questions.length; i++) {
+    console.log('foundQuizResult', quizResult)
+    const studentAnswerIndex = quizResult.answers[i]
+    let studentAnswer ;
+    if(studentAnswerIndex === "0"){
+      studentAnswer = quiz.questions[i].answerA
+    }else if(studentAnswerIndex === "1"){
+      studentAnswer = quiz.questions[i].answerB
+    }else if(studentAnswerIndex === "2"){
+      studentAnswer = quiz.questions[i].answerC
+    }else{
+      studentAnswer = quiz.questions[i].answerD
+    }
+let correct = false
+    if(quiz.questions[i].correctAnswer === studentAnswerIndex){
+      correct = true
+      numCorrect ++
+    }
+   %>
+  <ul>
+    <li><%= i+1%>.<%=quiz.questions[i].prompt%> <br>
+      student answer : <%=studentAnswer%>
+      <%=correct?"correct":"wrong"%>
+     </li>
+  </ul>
+<% } %>
+
+<%= numCorrect/quiz.questions.length%>

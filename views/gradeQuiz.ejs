@@ -1,0 +1,10 @@
+<h1>Grade Quiz <%=quizName%> for Course: <%=courseName%> </h1>
+
+
+<div class="students">
+  <ul>
+    <% for(var i = 0; i < students.length; i++) { %>
+        <li><a href="/gradeQuizStudent?studentId=<%=students[i]._id%>&quizId=<%=quizId%>"> <%=students[i].email%></a></li>
+    <% } %>
+  </ul>
+</div>

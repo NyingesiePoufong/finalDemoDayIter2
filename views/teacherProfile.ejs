@@ -1,0 +1,11 @@
+  <h1>I'm a teacher</h1>
+
+  <a href="/createQuiz"><button type="button" name="button">Create New Quiz</button></a>
+
+  <div class="students">
+    <ul>
+      <% for(var i = 0; i < quizList.length; i++) { %>
+          <li><a href="/gradeQuiz?quizId=<%=quizList[i]._id%>&course=<%=quizList[i].course%>&quizName=<%= quizList[i].quizName %>"><%= quizList[i].quizName %></a></li>
+      <% } %>
+    </ul>
+  </div>
