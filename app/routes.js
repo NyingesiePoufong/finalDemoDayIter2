@@ -16,10 +16,25 @@ module.exports = function(app, passport, db, ObjectID) {
       db.collection('students').findOne({email:req.user.local.email},(err, student) => {
         if (err) return console.log(err)
         console.log(student)
+        student.course = student.course.map(course => {
+          let quizzes =  student.quizzResults.filter(quiz => course.courseName== quiz.courseName)
+          total = 0;
+          for(let i=0; i< quizzes.length;i++){
+            total += quizzes[i].score
+          }
+          avg = "No Attempt Yet!";
+          if(quizzes.length > 0){
+            avg = total/quizzes.length * 100
+            avg = `${avg}%`
+          }
+          course.average = avg
+          return course
+        })
         //find all the quizzes in the class of the student
         // db.collection('quiz').find({}).toArray((err, result) => {
         //
         // }
+        console.log("Transformed Student", student)
         res.render('studentProfile.ejs', {
           user : req.user,
           student: student
@@ -87,17 +102,32 @@ module.exports = function(app, passport, db, ObjectID) {
       questionNum ++
     }
     quizResult.answers = answers
-    console.log("looking for user" ,quizResult,req.user.local.email )
-    db.collection('students').findOneAndUpdate({email:req.user.local.email}, {
-      $push: {
-        quizzResults: quizResult
+    db.collection("quiz").findOne({_id: ObjectID(req.body.quizId)}, (err, quiz)=>{
+      let score = 0
+      for(let i=0; i < quiz.questions.length; i++){
+        if (quiz.questions[i].correctAnswer == answers[i]){
+          score++
+        }
       }
-    }, {
-      sort: {_id: -1},
-    }, (err, result) => {
-      console.log("???" ,err, result)
-      res.redirect("profile")
+      quizResult.score = score
+      quizResult.courseName = quiz.course
+
+      console.log("looking for user" ,quizResult,req.user.local.email )
+      db.collection('students').findOneAndUpdate({email:req.user.local.email}, {
+        $push: {
+          quizzResults: quizResult
+        }
+      }, {
+        sort: {_id: -1},
+      }, (err, result) => {
+        console.log("???" ,err, result)
+        res.redirect("profile")
+      })
+
     })
+
+
+
   })
 
   app.get('/gradeQuiz', isLoggedIn, (req, res)=>{
@@ -220,42 +250,55 @@ module.exports = function(app, passport, db, ObjectID) {
 
   app.post('/createQuiz', (req, res) => {
     //try to find quiz using the given criteria
-
+    console.log("The body on post",req.body)
     db.collection('quiz').findOne({teacherId:req.user.local.email, quizName: req.body.quizName, course: req.body.course},(err, result) =>{
       console.log("found quiz", result)
       const currentQuestion = {prompt: req.body.prompt,answerA:req.body.answerA, answerB:req.body.answerB, answerC:req.body.answerC, answerD:req.body.answerD, correctAnswer: req.body.correctAnswer};
+      console.log(currentQuestion)
       //if we do not find it
       if(result === null){
         //we did not find it so we are creating a new one with the first question we created
-        db.collection('quiz').save({teacherId:req.user.local.email, quizName: req.body.quizName, course: req.body.course, description: req.body.description, dueDate:req.body.dueDate, questions:[currentQuestion]}, (err, result) => {
-          if (err) return console.log(err)
-          console.log('saved to database')
-          if(req.body.done){
-            res.redirect('/profile')
-          } else {
-            //we need a way to know what quiz they are working on thus the queryString/?
-            res.redirect('/createQuiz?quizId='+result._id)
-          }
-        })
+        db.collection('quiz').save({
+        teacherId: req.user.local.email,
+        quizName: req.body.quizName,
+        course: req.body.course,
+        description: req.body.description,
+        dueDate: req.body.dueDate,
+        questions: [currentQuestion]
+      }, (err, newQuiz) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        if (req.body.done) {
+          res.redirect('/profile')
+        } else {
+          //we need a way to know what quiz they are working on thus the queryString/?
+          console.log("New Quiz", newQuiz.ops)
+          res.redirect('/createQuiz?quizId=' + newQuiz.ops[0]._id)
+        }
+      })
       } else {
         //we found it using the id of the document/object and we are updating it with a new question
         console.log('updating quiz', result._id)
         db.collection('quiz')
-        .findOneAndUpdate({_id:result._id}, {
-          $push: {
-            questions: currentQuestion
-          }
-        }, {
-          sort: {_id: -1},
-        }, (err, result) => {
-          console.log('UPDATES', updateResult)
-          if (err) return res.send(err)
-          if(req.body.done){
-            res.redirect('/profile')
-          } else {
-            res.redirect('/createQuiz?quizId='+result._id)
-          }
-        })
+      .findOneAndUpdate({
+        _id: result._id
+      }, {
+        $push: {
+          questions: currentQuestion
+        }
+      }, {
+        sort: {
+          _id: -1
+        },
+      }, (err, updateresult) => {
+        console.log('UPDATES', updateresult)
+        if (err) return res.send(err)
+        if (req.body.done) {
+          res.redirect('/profile')
+        } else {
+          res.redirect('/createQuiz?quizId=' + result._id)
+        }
+      })
       }
     })
   })

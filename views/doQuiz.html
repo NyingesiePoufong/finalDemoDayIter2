@@ -1,3 +1,16 @@
+
+<ol>
+  <li><%=quiz.questions[i].prompt%>
+    <input type="hidden" name="" value="">
+        <span><%=quiz.questions[i].answerA%> <input type="radio" name="answer<%=i%>" value="0"></span>
+        <span><%=quiz.questions[i].answerB%> <input type="radio" name="answer<%=i%>" value="1"></span>
+        <span><%=quiz.questions[i].answerC%> <input type="radio" name="answer<%=i%>" value="2"></span>
+        <span><%=quiz.questions[i].answerD%> <input type="radio" name="answer<%=i%>" value="3"></span>
+  </li>
+<% } %>
+</ol>
+
+====================================
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -18,23 +31,22 @@
           <label for="questions">Please Answer The Questions Below</label>
           <input id="questions" type="hidden" name="quizId" value="<%=quiz._id%>">
         </div>
-      <ol>
         <% for(var i = 0; i < quiz.questions.length; i++) { %>
+
+          <ol>
             <li>
               <div class="form-group">
-                <%=quiz.questions[i].prompt%>
-                <input class="form-control" type="hidden" name="" value="">
-                <br>
-                    <span><%=quiz.questions[i].answerA%> <input type="radio" name="answer<%=i%>" value="0"></span>
-                    <span><%=quiz.questions[i].answerB%> <input type="radio" name="answer<%=i%>" value="1"></span>
-                    <span><%=quiz.questions[i].answerC%> <input type="radio" name="answer<%=i%>" value="2"></span>
-                    <span><%=quiz.questions[i].answerD%> <input type="radio" name="answer<%=i%>" value="3"></span>
+                <label for="q1"><%=quiz.questions[i].prompt%></label> <br>
+                <span><%=quiz.questions[i].answerA%> <input type="radio" name="answer<%=i%>" value="0"></span>
+                <span><%=quiz.questions[i].answerB%> <input type="radio" name="answer<%=i%>" value="1"></span>
+                <span><%=quiz.questions[i].answerC%> <input type="radio" name="answer<%=i%>" value="2"></span>
+                <span><%=quiz.questions[i].answerD%> <input type="radio" name="answer<%=i%>" value="3"></span>
               </div>
             </li>
-        <% } %>
-      </ol>
-      <br>
-      <br>
+          </ol>
+
+          <% } %>
+
       <button class="btn btn-primary" type="submit" name="button">Submit</button>
     </form>
     </div>

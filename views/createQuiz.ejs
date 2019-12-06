@@ -1,25 +1,68 @@
-<h1>New Quiz</h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Create Quiz</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>New Quiz</h1>
 
-<form action="/createQuiz" method="post">
-  <input name="quizName" <%= quiz?"disabled":""%> value="<%= quiz?quiz.quizName:""%>" placeholder="quiz name">
-  <input name="course" <%= quiz?"disabled":""%> value="<%= quiz?quiz.course:""%>" placeholder="course name">
-  <input name="teacherId" type="hidden" value="<%=user.local.email%>" placeholder="teacher id">
-  <input name="dueDate" value="<%= quiz?quiz.dueDate:""%>" placeholder="dueDate">
-  <input name="description" <%= quiz?"disabled":""%> value="<%= quiz?quiz.description:""%>" placeholder="description">
-      <label for="">Question</label>
-      <input name="prompt" value="" placeholder="prompt">
-      <label for="">Answers</label>
-      <input class="" type="text" name="answerA" value="" placeholder="solution">
-      <input class="" type="text" name="answerB" value="" placeholder="solution">
-      <input class="" type="text" name="answerC" value="" placeholder="solution">
-      <input class="" type="text" name="answerD" value="" placeholder="solution">
-      <label for="">Correct Answer</label>
-      <select class="" name="correctAnswer">
-        <option class="" value="0">A</option>
-        <option class="" value="1">B</option>
-        <option class="" value="2">C</option>
-        <option class="" value="3">D</option>
-      </select>
-  <button value="done" type="submit" name="done">Save Question & Finish Quiz</button>
-  <button value="continue" type="submit" name="continue">Save Question & Continue</button>
-</form>
+      <form action="/createQuiz" method="post">
+        <input name="teacherId" type="hidden" value="<%=user.local.email%>" placeholder="teacher id">
+        <div class="form-group">
+          <label for="quizId">Quiz Name</label>
+          <input id="quizId" name="quizName" class="form-control" <%= quiz?"readonly":""%> value="<%= quiz?quiz.quizName:""%>" placeholder="quiz name">
+        </div>
+        <div class="form-group">
+          <label for="courseName">Course Name</label>
+          <input class="form-control" id="courseName" name="course" <%= quiz?"readonly":""%> value="<%= quiz?quiz.course:""%>" placeholder="course name">
+        </div>
+        <div class="form-group">
+          <label for="dueDate">Due Date</label>
+          <input id="dueDate" class="form-control" name="dueDate" value="<%= quiz?quiz.dueDate:""%>" placeholder="dueDate">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input class="form-control" id="description" name="description" <%= quiz?"readonly":""%> value="<%= quiz?quiz.description:""%>" placeholder="description">
+        </div>
+        <div class="form-group">
+          <label for="question">Question</label>
+          <input class="form-control" id="question" name="description" value="" placeholder="prompt">
+        </div>
+        <div class="form-group">
+          <label for="answers">Answers</label>
+          <input class="form-control" id="answer1" name="answersA" value="" placeholder="solution">
+        </div>
+        <div class="form-group">
+          <label for="answers">Answers</label>
+          <input class="form-control" id="answer2" name="answersB" value="" placeholder="solution">
+        </div>
+        <div class="form-group">
+          <label for="answers">Answers</label>
+          <input class="form-control" id="answer3" name="answersC" value="" placeholder="solution">
+        </div>
+        <div class="form-group">
+          <label for="answers">Answers</label>
+          <input class="form-control" id="answer4" name="answersD" value="" placeholder="solution">
+        </div>
+        <div class="form-group">
+          <label for="correctAnswer">Correct Answer</label>
+          <select class="" name="correctAnswer">
+            <option class="" value="0">A</option>
+            <option class="" value="1">B</option>
+            <option class="" value="2">C</option>
+            <option class="" value="3">D</option>
+          </select>
+        </div>
+
+        <button value="done" class="btn btn-primary" type="submit" name="done">Save Question & Finish Quiz</button>
+        <button value="continue" class="btn btn-primary" type="submit" name="continue">Save Question & Continue</button>
+      </form
+    </div>
+  </body>
+</html>
