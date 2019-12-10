@@ -2,10 +2,10 @@
 <ol>
   <li><%=quiz.questions[i].prompt%>
     <input type="hidden" name="" value="">
-        <span><%=quiz.questions[i].answerA%> <input type="radio" name="answer<%=i%>" value="0"></span>
-        <span><%=quiz.questions[i].answerB%> <input type="radio" name="answer<%=i%>" value="1"></span>
-        <span><%=quiz.questions[i].answerC%> <input type="radio" name="answer<%=i%>" value="2"></span>
-        <span><%=quiz.questions[i].answerD%> <input type="radio" name="answer<%=i%>" value="3"></span>
+        <span><%=quiz.questions[i].answersA%> <input type="radio" name="answer<%=i%>" value="0"></span>
+        <span><%=quiz.questions[i].answersB%> <input type="radio" name="answer<%=i%>" value="1"></span>
+        <span><%=quiz.questions[i].answersC%> <input type="radio" name="answer<%=i%>" value="2"></span>
+        <span><%=quiz.questions[i].answersD%> <input type="radio" name="answer<%=i%>" value="3"></span>
   </li>
 <% } %>
 </ol>
@@ -37,10 +37,10 @@
             <li>
               <div class="form-group">
                 <label for="q1"><%=quiz.questions[i].prompt%></label> <br>
-                <span><%=quiz.questions[i].answerA%> <input type="radio" name="answer<%=i%>" value="0"></span>
-                <span><%=quiz.questions[i].answerB%> <input type="radio" name="answer<%=i%>" value="1"></span>
-                <span><%=quiz.questions[i].answerC%> <input type="radio" name="answer<%=i%>" value="2"></span>
-                <span><%=quiz.questions[i].answerD%> <input type="radio" name="answer<%=i%>" value="3"></span>
+                <span><%=quiz.questions[i].answersA%> <input type="radio" name="answers<%=i%>" value="0"></span>
+                <span><%=quiz.questions[i].answersB%> <input type="radio" name="answers<%=i%>" value="1"></span>
+                <span><%=quiz.questions[i].answersC%> <input type="radio" name="answers<%=i%>" value="2"></span>
+                <span><%=quiz.questions[i].answersD%> <input type="radio" name="answers<%=i%>" value="3"></span>
               </div>
             </li>
           </ol>

@@ -2,40 +2,33 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const SurveySchema = new Schema({
-  surveyName: {
+  SurveyName: {
     type: String,
     required: true
+  },
+  quizName: {
+    type:String,
+    required:true
   },
   course: {
     type: String,
-    required: true
   },
   section: {
     type: String,
-    required: true
   },
-  teacher: {
-    type: String,
+  teacherId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   dueDate: {
     type: Date,
-    required: false
-  },
-  studentName: {
-    type: String,
-    required: false
+    required: true
   },
   description: {
     type: String,
-    required: false
   },
   questions: {
     type: Array,
-    required: true
-  },
-  results: {
-    type: String,
     required: true
   }
 })

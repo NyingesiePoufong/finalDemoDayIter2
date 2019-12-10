@@ -2,6 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="owl.transitions.css">
+    <link rel="stylesheet" href="owl.theme.css">
+    <link rel="stylesheet" href="jquery.fancybox.css">
+    <link rel="stylesheet" href="fontello.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="audioplayer.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Create Quiz</title>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -9,10 +17,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info mb-3">
+    <a class="navbar-brand text-white" href="/">Balance Ed</a>
+
+    <a href="/logout" class="nav-link text-white ml-auto">Logout</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    </nav>
+
     <div class="container">
       <h1>New Quiz</h1>
 
-      <form action="/createQuiz" method="post">
+      <form action="/createQuiz" method="post" class="mb-3">
         <input name="teacherId" type="hidden" value="<%=user.local.email%>" placeholder="teacher id">
         <div class="form-group">
           <label for="quizId">Quiz Name</label>
@@ -32,7 +52,7 @@
         </div>
         <div class="form-group">
           <label for="question">Question</label>
-          <input class="form-control" id="question" name="description" value="" placeholder="prompt">
+          <input class="form-control" id="question" name="prompt" value="" placeholder="prompt">
         </div>
         <div class="form-group">
           <label for="answers">Answers</label>
@@ -60,8 +80,9 @@
           </select>
         </div>
 
-        <button value="done" class="btn btn-primary" type="submit" name="done">Save Question & Finish Quiz</button>
-        <button value="continue" class="btn btn-primary" type="submit" name="continue">Save Question & Continue</button>
+        <button value="done" class="btn btn-info" type="submit" name="done">Save Question & Finish Quiz</button>
+        <button value="continue" class="btn btn-info" type="submit" name="continue">Save Question & Continue</button>
+          <button value="newSurvey" class="btn btn-info" type="submit" name="newSurvey">Save & Create Survey?</button>
       </form
     </div>
   </body>

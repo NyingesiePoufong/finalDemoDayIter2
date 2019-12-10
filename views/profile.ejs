@@ -4,21 +4,37 @@
     <title>Profile/Dashboard</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="owl.transitions.css">
+    <link rel="stylesheet" href="owl.theme.css">
+    <link rel="stylesheet" href="jquery.fancybox.css">
+    <link rel="stylesheet" href="fontello.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="audioplayer.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info mb-3">
+    <a class="navbar-brand text-white" href="/">Balance Ed</a>
+
+    <a href="/logout" class="nav-link text-white ml-auto">Logout</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    </nav>
+
   <% if (user.local.role === "teacher") { %>
       <%- include("teacherProfile", {user:user, quizList:quizList}) %>
-<%  } else if (user.local.role === "student") { %>
+  <%  } else if (user.local.role === "student") { %>
       <%- include("studentProfile", {user:user, assignments:assignments}) %>
-<% } else if (user.local.role === "parent") { %>
+  <% } else if (user.local.role === "parent") { %>
     <%- include("parentProfile", {user:user}) %>
-<% }  %>
+  <% }  %>
 
-    <div class="page-header text-center">
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+  
 
 
 </body>
