@@ -1,0 +1,6 @@
+course has many quizzes
+quiz has many surveys
+student has many courses
+teacher has many courses
+teacher has many students
+parent has many students

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TeacherSchema = new Schema({
+const ParentSchema = new Schema({
   email: {
     type: String,
     required: true
@@ -9,18 +9,12 @@ const TeacherSchema = new Schema({
   picture: {
     type: String,
   },
-  course: {
-    type: Array,
-  },
   students: [{
     type: Schema.Types.ObjectId,
     ref: 'Student'
-  }],
-  quizzes: {
-    type: Array
-  }
+  }]
 })
 
-const Teacher = mongoose.model('Teacher', TeacherSchema)
+const Parent = mongoose.model('Parent', ParentSchema)
 
-module.exports = Teacher
+module.exports = Parent

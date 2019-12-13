@@ -7,6 +7,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var User       		= require('../app/models/user');
 var Student       		= require('../app/models/student');
 var Teacher       		= require('../app/models/teacher');
+var Parent       		= require('../app/models/parent');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -67,6 +68,7 @@ module.exports = function(passport) {
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
                 newUser.local.role = req.body.role;
                 newUser.name = req.body.name;
+                newUser.parentContactInfo = req.body.parentContactInfo
 
                 if (req.body.role.toLowerCase() === "student"){
                   console.log("student")
@@ -83,7 +85,11 @@ module.exports = function(passport) {
                   newUser.local.refId = newTeacher._id
                   newTeacher.save()
                 }else{
-                  console.log("student default")
+                  console.log("parent")
+                  var newParent            = new Parent();
+                  newParent.email = email;
+                  newUser.local.refId = newParent._id
+                  newParent.save()
                 }
 
 				// save the user

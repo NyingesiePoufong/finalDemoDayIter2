@@ -10,10 +10,6 @@ const CourseSchema = new Schema({
     type: String,
     required: true
   },
-  instructors: {
-    type: Array,
-    required: true
-  },
   description: {
     type: String,
     required: true
@@ -26,18 +22,20 @@ const CourseSchema = new Schema({
     type: Date,
     required: true
   },
-  students: {
-    type: Array,
-    required: false
-  },
-  sections: {
-    type: Array,
+  instructors: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Teacher',
     required: true
-  },
-  quizzes: {
-    type: Array,
+  }],
+  students: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Student',
+  }],
+  quizzes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Quiz',
     required: true
-  }
+  }]
 })
 
 const Course = mongoose.model('Course', CourseSchema)

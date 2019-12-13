@@ -10,56 +10,54 @@
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="audioplayer.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="font/demo-files/demo.css">
-  	<link rel="stylesheet" href="plugins/revolution/css/settings.css">
-  	<link rel="stylesheet" href="plugins/revolution/css/layers.css">
-  	<link rel="stylesheet" href="plugins/revolution/css/navigation.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Student Profile</title>
+    <title>Enrollments</title>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Enroll Course</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info mb-3">
     <a class="navbar-brand text-white" href="/">Balance Ed</a>
-    <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item">
-        <div class="page-header text-center">
-          <a href="/logout" class="nav-link text-white">Logout</a>
-        </div>
-      </li>
-    </ul>
+
+    <a href="/logout" class="nav-link text-white ml-auto">Logout</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
 
+
     </nav>
-  <div class='align-center page-title orange'>
 
-    <div class="breadcrumbs-wrap">
+    <div class="container">
+      <h1>Enrollments Course</h1>
 
-      <div class="container">
+      <form action="/enrollmentsByCourses/<%=courseId%>" method="post" class="mb-3">
 
-        <h1 class="page-title">Courses For <%=user.local.email%></h1>
-
-            <a href="/enroll">Enroll In Course(s)</a>
-
-      </div>
-
-    </div>
-  </div>
-
-    <div class="assignments container mt-5">
-      <ul class="list-group">
-        <% for(var i = 0; i < student.course.length; i++) { %>
-            <li class="list-group-item list-group-item-action"><a class="links" href="/course?teacherId=<%=student.course[i].teacherId%>&courseName=<%=student.course[i].courseName%>"> <span> Course Name: <%=student.course[i].courseName%></span> <br>
-              <span>Current Grade: <%=student.course[i].average%></span>
-              </a></li>
+        <table class="table table-striped">
+          <thead>
+            <th></th>
+            <th>Student Name</th>
+            <th>Title</th>
+          </thead>
+          <tbody>
+        <% for (let i = 0; i <enrollments.length; i++) { %>
+          <tr>
+            <td>
+              <input type="hidden" name="course" value="<%=enrollments[i].course%>">
+               <input type="radio" name="student" value="<%=enrollments[i].student%>"> </td>
+            <td><%= enrollments[i].student %></td>
+            <td><%= enrollments[i].course %></td>
+          </tr>
         <% } %>
-      </ul>
-    </div>
+      </tbody>
+    </table>
 
-  </div>
-</head>
-</body>
+
+
+        <button class="btn btn-info" type="submit">Submit Registration </button>
+
+      </form>
+    </div>
+  </body>
+</html>

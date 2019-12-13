@@ -33,42 +33,42 @@
       <h1>New Quiz</h1>
 
       <form action="/createQuiz" method="post" class="mb-3">
-        <input name="teacherId" type="hidden" value="<%=user.local.email%>" placeholder="teacher id">
+        <input name="teacherId" type="hidden" value="<%=user.local.email%>" >
         <div class="form-group">
           <label for="quizId">Quiz Name</label>
-          <input id="quizId" name="quizName" class="form-control" <%= quiz?"readonly":""%> value="<%= quiz?quiz.quizName:""%>" placeholder="quiz name">
+          <input id="quizId" name="quizName" class="form-control" <%= quiz?"readonly":""%> value="<%= quiz?quiz.quizName:""%>" >
         </div>
         <div class="form-group">
           <label for="courseName">Course Name</label>
-          <input class="form-control" id="courseName" name="course" <%= quiz?"readonly":""%> value="<%= quiz?quiz.course:""%>" placeholder="course name">
+          <input class="form-control" id="courseName" name="course" <%= quiz?"readonly":""%> value="<%= quiz?quiz.course:""%>" >
         </div>
         <div class="form-group">
           <label for="dueDate">Due Date</label>
-          <input id="dueDate" class="form-control" name="dueDate" value="<%= quiz?quiz.dueDate:""%>" placeholder="dueDate">
+          <input id="dueDate" class="form-control" name="dueDate" value="<%= quiz?quiz.dueDate:""%>" >
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <input class="form-control" id="description" name="description" <%= quiz?"readonly":""%> value="<%= quiz?quiz.description:""%>" placeholder="description">
+          <input class="form-control" id="description" name="description" <%= quiz?"readonly":""%> value="<%= quiz?quiz.description:""%>" >
         </div>
         <div class="form-group">
           <label for="question">Question</label>
-          <input class="form-control" id="question" name="prompt" value="" placeholder="prompt">
+          <input class="form-control" id="question" name="prompt" value="" >
         </div>
         <div class="form-group">
           <label for="answers">Answers</label>
-          <input class="form-control" id="answer1" name="answersA" value="" placeholder="solution">
+          <input class="form-control" id="answers1" name="answersA" value="" >
         </div>
         <div class="form-group">
           <label for="answers">Answers</label>
-          <input class="form-control" id="answer2" name="answersB" value="" placeholder="solution">
+          <input class="form-control" id="answers2" name="answersB" value="" >
         </div>
         <div class="form-group">
           <label for="answers">Answers</label>
-          <input class="form-control" id="answer3" name="answersC" value="" placeholder="solution">
+          <input class="form-control" id="answers3" name="answersC" value="" >
         </div>
         <div class="form-group">
           <label for="answers">Answers</label>
-          <input class="form-control" id="answer4" name="answersD" value="" placeholder="solution">
+          <input class="form-control" id="answers4" name="answersD" value="" >
         </div>
         <div class="form-group">
           <label for="correctAnswer">Correct Answer</label>
@@ -83,7 +83,7 @@
         <button value="done" class="btn btn-info" type="submit" name="done">Save Question & Finish Quiz</button>
         <button value="continue" class="btn btn-info" type="submit" name="continue">Save Question & Continue</button>
           <button value="newSurvey" class="btn btn-info" type="submit" name="newSurvey">Save & Create Survey?</button>
-      </form
+      </form>
     </div>
   </body>
 </html>

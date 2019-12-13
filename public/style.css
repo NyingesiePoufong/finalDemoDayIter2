@@ -3103,7 +3103,7 @@ button.search-button:before{content: "\e922";}
 
     /* Inputs & Textarea */
 
-  
+
 
     textarea{
       display: block;
@@ -7624,4 +7624,18 @@ button.search-button:before{content: "\e922";}
     a:hover{
       color: #333 !important;
       text-decoration: none !important;
+    }
+
+    .mainBg{
+      background:center center url('../img/login.jpg');
+      height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+    }
+
+    .container .jumbotron{
+      background: rgba(255, 255, 255, .5)
     }

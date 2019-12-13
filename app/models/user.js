@@ -11,11 +11,12 @@ var userSchema = mongoose.Schema({
         role         : String,
         refId        : mongoose.Schema.Types.ObjectId
     },
+    parentContactInfo: String,
     name: {
       type: String,
       required: true
     },
-    
+
 });
 
 // generating a hash
