@@ -22,7 +22,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-    <a class="navbar-brand text-white" href="/">Balance Ed</a>
+    <a class="navbar-brand text-white" href="/profile">Balance Ed</a>
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item">
         <div class="page-header text-center">
@@ -43,7 +43,7 @@
 
         <h1 class="page-title">Courses For <%=user.local.email%></h1>
 
-            <a href="/enroll">Enroll In Course(s)</a>
+            <button class="btn btn-info" type="button"> <a href="/enroll" class="text-white"> Enroll In Course(s)</a></button>
 
       </div>
 
@@ -53,7 +53,7 @@
     <div class="assignments container mt-5">
       <ul class="list-group">
         <% for(var i = 0; i < student.course.length; i++) { %>
-            <li class="list-group-item list-group-item-action"><a class="links" href="/course?teacherId=<%=student.course[i].teacherId%>&courseName=<%=student.course[i].courseName%>"> <span> Course Name: <%=student.course[i].courseName%></span> <br>
+            <li class="list-group-item list-group-item-action"><a class="links" href="/course?teacherId=<%=student.course[i].teacherEmail%>&courseName=<%=student.course[i].courseName%>"> <span> Course Name: <%=student.course[i].courseName%></span> <br>
               <span>Current Grade: <%=student.course[i].average%></span>
               </a></li>
         <% } %>

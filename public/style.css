@@ -7639,3 +7639,7 @@ button.search-button:before{content: "\e922";}
     .container .jumbotron{
       background: rgba(255, 255, 255, .5)
     }
+
+    .proFile{
+      float: right;
+    }

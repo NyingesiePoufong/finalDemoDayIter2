@@ -20,14 +20,14 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-      console.log("serialize\n", user.local.role)
+      //console.log("serialize\n", user.local.role)
         done(null, {_id: user.id, role: user.local.role});
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
-          console.log("deserialize\n", user)
+          //console.log("deserialize\n", user)
             done(err, user);
         });
     });
@@ -76,14 +76,22 @@ module.exports = function(passport) {
                   var newStudent            = new Student();
                   // go to our document and find the property/key email and set it equal to the value email from our form
                   newStudent.email = email;
-                  newUser.local.refId = newStudent._id
-                  newStudent.save()
+                  newUser.local.refId = newStudent._id;
+                  newStudent.parentContactInfo = req.body.parentContactInfo;
+                  newStudent.save();
                 } else if(req.body.role.toLowerCase() === "teacher"){
-                  console.log("teacher")
-                  var newTeacher            = new Teacher();
-                  newTeacher.email = email;
-                  newUser.local.refId = newTeacher._id
-                  newTeacher.save()
+                  console.log("teacher=>>>>>>")
+                  // var newTeacher            = new Teacher();
+                  // newTeacher.email = email;
+                  // newTeacher.save((err, result))
+                  // newUser.local.refId = newTeacher._id
+                  Teacher.create({
+                    email:email,
+                  }).then(teacher => {
+                    console.log('teacher created', teacher);
+                    newUser.local.refId = teacher._id
+                  })
+                  .catch(err => console.log('err creating teacher', err))
                 }else{
                   console.log("parent")
                   var newParent            = new Parent();

@@ -43,7 +43,7 @@
           <tbody>
         <% for (let i = 0; i <courses.length; i++) { %>
           <tr>
-            <td> <input type="checkbox" name="<%=courses[i].shortName%>" value="<%=courses[i]._id%>"> </td>
+            <td> <input type="checkbox" name="<%=courses[i].teacherId%>" value="<%=courses[i]._id%>"> </td>
             <td><%= courses[i].shortName %></td>
             <td><%= courses[i].title %></td>
           </tr>
@@ -54,6 +54,8 @@
 
 
         <button class="btn btn-info" type="submit">Submit Registration </button>
+
+        <button class="btn btn-info" type="button"> <a href="/profile" class="text-white">Back To Profile</a></button>
 
       </form>
     </div>

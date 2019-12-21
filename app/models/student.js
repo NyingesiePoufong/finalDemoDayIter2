@@ -31,6 +31,9 @@ const StudentSchema = new Schema({
   },
   completedAssignments: {
     type: Array,
+  },
+  parentContactInfo: {
+    type: String,
   }
 })
 

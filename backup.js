@@ -17,7 +17,7 @@ module.exports = function(app, passport, db, ObjectID) {
     if (req.user.local.role === 'student') {
       db.collection('students').findOne({email:req.user.local.email},(err, student) => {
         if (err) return console.log(err)
-        console.log('STUDENT!!!!!!!!',JSON.stringify(student))
+        //console.log(student)
         student.course = student.course.map(course => {
           let quizzes =  student.quizzResults.filter(quiz => course.courseName== quiz.courseName && (!quiz.type || quiz.type === "quiz"))
           console.log("quizes**********", quizzes)
@@ -75,7 +75,7 @@ module.exports = function(app, passport, db, ObjectID) {
   app.get('/course', (req, res) =>{
     const teacherId = req.query.teacherId
     const courseName = req.query.courseName
-    db.collection('quiz').find({teacherId: teacherId, course:courseName, "type": "quiz"}).toArray((err, quizList) =>{
+    db.collection('quiz').find({teacherId:teacherId, course:courseName, "type": "quiz"}).toArray((err, quizList) =>{
       console.log('FINDING QUIZLIST!!!!!!!!!!!!!', quizList, err)
       res.render('studentQuizList', {
         user: req.user,
@@ -528,7 +528,7 @@ module.exports = function(app, passport, db, ObjectID) {
       console.log('reqqqqq user==>>>', req.user)
       const teacherEmail = req.user.local.email
       const {shortName, title, startDate, endDate, description} = req.body;
-      db.collection('courses').insert({shortName, teacherEmail, teacherId: req.user._id, title, startDate, endDate, description}, (err, result) => {
+      db.collection('courses').insert({shortName, teacherEmail, title, startDate, endDate, description}, (err, result) => {
         if (err) return console.log(err)
         //find one and update on the teacher to add the course to the teacher's course array --> for future reference perhaps depends
         console.log('saved to database')
@@ -557,44 +557,26 @@ module.exports = function(app, passport, db, ObjectID) {
     app.post('/enroll', isLoggedIn, (req, res) => {
       const student = req.user.local.refId;
       const courses = Object.entries(req.body);
-      console.log('WHAT ARE THE COURSES', courses, req.body)
       const promiseArr = courses.map(([teacherId, courseId]) =>{
         return new Promise((resolve, reject) => {
           db.collection('enrollments').insert({student, course: courseId }, (err, result) => {
-            console.log('ENROLLMENTS ERROR', err)
             if (err) {
               reject(err);
             } else {
-              console.log('ENROLLMENTS saved to daabase', student, courseId);
+              console.log('saved to daabase');
 
-              db.collection('teachers').findOneAndUpdate({_id: teacherId}, {$push: {students: student}}, (teacherErr, result) => {
-                console.log('PUSH STUDENT INTO ARRAY', teacherId, student)
-                db.collection('courses').findOne({_id: ObjectID(courseId)},(courseErr, course) =>{
-                  let courseTitle = course.title
-                  console.log("FOUND COURSE", courseTitle, courseId)
-                  db.collection('users').findOne({_id: ObjectID(teacherId)}, (err, userResult) =>{
-
-
-                    db.collection('students').findOneAndUpdate({_id: ObjectID(student)},{$push: {course: {courseName: courseTitle, teacherId: teacherId, teacherEmail: userResult.local.email}}}, (studentErr, studentResult) => {
-                      console.log('STUDENT REULTS', studentResult)
-
-
-
-                      console.log('studenrttrttt ERROR', studentErr, 'teachererrrrrr RESULT', result)
-                      if (teacherErr || courseErr || studentErr) {
-                        reject(teacherErr + courseErr + studentErr);
-                      } else {
-                        resolve(result);
-                      }
-                    })
-                  })
-                })
+              db.collection('teachers').findOneAndUpdate({_id: teacherId}, {$push: {students: student}}, (err, result) => {
+                console.log('studenrttrttt', err, 'teachererrrrrr', result)
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve(result);
+                }
               });
             }
           });
         });
       });
-      console.log('PROMISE ARRAYYYYY',promiseArr)
       Promise.all(promiseArr).then(() => {
         res.redirect('/enroll');
       }).then(err => console.log('errrrrr', err));

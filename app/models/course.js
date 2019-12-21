@@ -22,11 +22,10 @@ const CourseSchema = new Schema({
     type: Date,
     required: true
   },
-  instructors: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Teacher',
+  teacherEmail: {
+    type: String,
     required: true
-  }],
+  },
   students: [{
     type: Schema.Types.ObjectId,
     ref: 'Student',

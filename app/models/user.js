@@ -13,8 +13,7 @@ var userSchema = mongoose.Schema({
     },
     parentContactInfo: String,
     name: {
-      type: String,
-      required: true
+      type: String
     },
 
 });
