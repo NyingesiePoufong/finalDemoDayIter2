@@ -27,7 +27,7 @@
     </nav>
 
   <% if (user.local.role === "teacher") { %>
-      <%- include("teacherProfile", {user:user, quizList:quizList}) %>
+      <%- include("teacher/teacherProfile", {user:user, quizList:quizList}) %>
   <%  } else if (user.local.role === "student") { %>
       <%- include("studentProfile", {user:user, assignments:assignments}) %>
   <% } else if (user.local.role === "parent") { %>

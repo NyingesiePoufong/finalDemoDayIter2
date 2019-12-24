@@ -17,6 +17,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </head>
   <body>
+    <%let survey = quiz.survey%>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <a class="navbar-brand text-white" href="/">Balance Ed</a>
@@ -37,7 +38,7 @@
         <div class="form-group">
           <label for="questions">Please Answer The Questions Below</label>
           <span>1 being the worst and 5 being the best</span>
-          <input id="questions" type="hidden" name="surveyId" value="<%=survey._id%>">
+          <input id="questions" type="hidden" name="surveyId" value="<%=quiz._id%>">
         </div>
       <ol>
         <% for(var i = 0; i < survey.questions.length; i++) { %>
@@ -69,7 +70,7 @@
                     </span>
                     <br>
                     <span><%=survey.questions[i].comments%>
-                      <input type="text" name="coptions<%=i%>" value="" placeholder="any questions comments or concerns?">
+                      <textarea type="text" name="coptions<%=i%>" value="" placeholder="any questions comments or concerns?"></textarea>
                     </span>
               </div>
             </li>

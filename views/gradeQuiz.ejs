@@ -24,7 +24,11 @@
       <div class="students">
         <ul class="list-group">
           <% for(var i = 0; i < students.length; i++) { %>
-              <li><a class="list-group-item list-group-item-action" href="/gradeQuizStudent?studentId=<%=students[i]._id%>&quizId=<%=quizId%>"> <%=students[i].email%></a></li>
+            <%if(students[i].disabled) { %>
+              <li class="list-group-item list-group-item-action"> <%=students[i].student.email%> - incomplete</li>
+            <% } else { %>
+              <li class="list-group-item list-group-item-action"><a href="/gradeQuizStudent?studentId=<%=students[i].student._id%>&quizId=<%=quizId%>"> <%=students[i].student.email%> - complete</a></li>
+          <%  } %>
           <% } %>
         </ul>
       </div>

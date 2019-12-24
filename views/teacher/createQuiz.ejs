@@ -35,6 +35,7 @@
 
       <form action="/createQuiz" method="post" class="mb-3">
         <input name="teacherId" type="hidden" value="<%=user.local.email%>" >
+        <input name="quizId" type="hidden" value="<%=quiz?quiz._id:""%>">
         <div class="form-group">
           <label for="quizId">Quiz Name</label>
           <input id="quizId" name="quizName" class="form-control" <%= quiz?"readonly":""%> value="<%= quiz?quiz.quizName:""%>" >
